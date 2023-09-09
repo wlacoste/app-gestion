@@ -4,7 +4,7 @@ import { UserAuthContextProvider } from "./context/userAuthContext";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Splash from "./Pages/Splash/Splash";
-import Signup from "./components/Signup";
+import Signup from "./Pages/Signup/Signup";
 import ButtonAppBar from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
