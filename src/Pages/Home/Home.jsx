@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { useUserAuth } from "../context/userAuthContext";
+import { useUserAuth } from "../../context/userAuthContext";
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -29,6 +29,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-

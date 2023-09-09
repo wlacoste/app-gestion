@@ -1,22 +1,34 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { UserAuthContextProvider } from "./context/userAuthContext";
-import Home from "./components/Home";
-import Login from "./components/Login";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import Splash from "./Pages/Splash/Splash";
 import Signup from "./components/Signup";
+import ButtonAppBar from "./components/Layout/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <UserAuthContextProvider>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <ButtonAppBar>
+          <Routes>
+            <Route path="/" element={<Splash />} />
+
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </ButtonAppBar>
       </UserAuthContextProvider>
     </>
   );
