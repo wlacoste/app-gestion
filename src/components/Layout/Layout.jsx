@@ -16,10 +16,11 @@ import MenuItem from "@mui/material/MenuItem";
 
 export default function ButtonAppBar({ children }) {
   const navigate = useNavigate();
-  const { user } = useUserAuth();
+  const { user, logOut } = useUserAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  //TODO reemplazar por componente de opciones
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -83,7 +84,9 @@ export default function ButtonAppBar({ children }) {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography onClick={logOut} textAlign="center">
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
