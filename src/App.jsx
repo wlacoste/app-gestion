@@ -7,7 +7,7 @@ import Splash from "./Pages/Splash/Splash";
 import Signup from "./Pages/Signup/Signup";
 import ButtonAppBar from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
-import "./App.css";
+import React from "react";
 
 function App() {
   return (
