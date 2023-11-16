@@ -13,8 +13,22 @@ import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import Avatar from "@mui/material/Avatar";
 import MenuItem from "@mui/material/MenuItem";
+import TemporaryDrawer from "../Drawer/Drawer";
+import { useState } from "react";
 
 export default function ButtonAppBar({ children }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setIsOpen(open);
+  };
   const navigate = useNavigate();
   const { user, logOut } = useUserAuth();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -54,7 +68,7 @@ export default function ButtonAppBar({ children }) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => alert("hola")}
+            onClick={() => setIsOpen(!isOpen)}
           >
             <MenuIcon />
           </IconButton>
@@ -100,7 +114,10 @@ export default function ButtonAppBar({ children }) {
       </AppBar>
 
       {/* <h1>hola</h1> */}
-      <main>{children}</main>
+      <main>
+        <TemporaryDrawer isOpen={isOpen} toggleDrawer={toggleDrawer} />
+        {children}
+      </main>
     </>
   );
 }

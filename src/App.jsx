@@ -8,6 +8,8 @@ import Signup from "./Pages/Signup/Signup";
 import ButtonAppBar from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import React from "react";
+import Formulario from "./Pages/Formulario/Formulario";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -22,6 +24,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/formulario"
+              element={
+                <ProtectedRoute>
+                  <Formulario />
                 </ProtectedRoute>
               }
             />
