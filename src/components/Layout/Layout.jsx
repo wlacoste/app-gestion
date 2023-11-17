@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+// @ts-ignore
 import styles from "./index.module.scss";
 import { useUserAuth } from "../../context/userAuthContext";
 import Menu from "@mui/material/Menu";

@@ -11,12 +11,11 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { useNavigate } from "react-router-dom";
+import { rutas } from "../../constants/routes";
+
 export default function TemporaryDrawer({ isOpen, toggleDrawer }) {
   const navigate = useNavigate();
-  const rutas = [
-    { ruta: "/dashboard", texto: "Inicio" },
-    { ruta: "/formulario", texto: "Formulario" },
-  ];
+
   const list = () => (
     <Box
       sx={{ width: 250 }}

@@ -4,6 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../../context/userAuthContext";
+import { rutas } from "../../constants/routes";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
     setError("");
     try {
       await logIn(email, password);
-      navigate("/home");
+      navigate(rutas[0].ruta);
     } catch (err) {
       setError(err.message);
     }
@@ -26,7 +27,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/home");
+      navigate(rutas[0].ruta);
     } catch (error) {
       console.log(error.message);
     }
@@ -55,7 +56,7 @@ const Login = () => {
           </Form.Group>
 
           <div className="d-grid gap-2">
-            <Button variant="primary" type="Submit">
+            <Button variant="primary" type="submit">
               Log In
             </Button>
           </div>
