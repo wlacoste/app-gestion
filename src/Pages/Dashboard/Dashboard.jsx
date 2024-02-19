@@ -4,7 +4,7 @@ import ProductForm from "../../components/InputNuevoGasto";
 const Dashboard = () => {
   return (
     <>
-      <div>Dashboard</div>;
+      <div>Dashboard</div>
       <ProductForm />
     </>
   );
