@@ -14,6 +14,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 import styles from "./styles.module.scss";
+
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
 const ProductForm = () => {
@@ -63,7 +64,7 @@ const ProductForm = () => {
 
   return (
     <Card className={styles.carda}>
-      <Typography variant="h2">Nuevo producto</Typography>
+      <Typography variant="h5">Nuevo producto</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Producto"
