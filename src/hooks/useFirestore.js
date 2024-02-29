@@ -70,14 +70,10 @@ export const useFirestore = () => {
 
   const updateData = async (nanoid, newDato) => {
     try {
-      console.log("updationg", newDato);
       setLoading((prev) => ({ ...prev, [nanoid]: true }));
       const docRef = doc(db, "urls", nanoid);
       await updateDoc(docRef, { origin: newDato.origin });
-      const index = data.findIndex((item) => item.nanoid === nanoid);
-      const updatedDatos = [...data];
-      updatedDatos[index] = { ...newDato };
-      setData(updatedDatos);
+      setData(data.map((item) => (item.nanoid === nanoid ? newDato : item)));
     } catch (error) {
       console.log(error);
       setError(error.message);
