@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import React from "react";
 import Formulario from "./Pages/Formulario/Formulario";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 function App() {
   return (
