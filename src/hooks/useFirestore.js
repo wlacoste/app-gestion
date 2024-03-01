@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { db, auth } from "../firebase-config";
 import {
   collection,
@@ -11,7 +11,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { nanoid } from "nanoid";
-import { useUserAuth } from "src/context/userAuthContext";
 
 export const useFirestore = () => {
   const [data, setData] = useState([]);

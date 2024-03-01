@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -8,6 +8,10 @@ import {
   FormControl,
   FormControlLabel,
   Collapse,
+  Select,
+  OutlinedInput,
+  InputLabel,
+  MenuItem,
 } from "@mui/material";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import dayjs, { Dayjs } from "dayjs";
@@ -16,6 +20,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import styles from "./styles.module.scss";
 
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { useCategories } from "src/hooks/useCategories";
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -24,10 +29,16 @@ const ProductForm = () => {
     price: "",
     isUnitario: false,
     category: "",
-    fechaVencimiento: dayjs().add(2, "week"),
+    fechaVencimiento: "",
     isVence: false,
     fechaCreacion: dayjs(),
   });
+
+  const {getCategorias, categorias, loading} = useCategories();
+
+  useEffect(()=>{
+    getCategorias();
+  },[]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,10 +48,14 @@ const ProductForm = () => {
     }));
   };
   const toggleVence = () => {
+    // if(!product.isVence){
+    //   setProduct({...product, fechaVencimiento:""})
+    // }
     setProduct((prevProduct) => ({
       ...prevProduct,
       isVence: !prevProduct.isVence,
-      fechaVencimiento: dayjs().add(2, "week"),
+      // fechaVencimiento: dayjs().add(2, "week"),
+      fechaVencimiento: !prevProduct.isVence ? dayjs().add(2, "week"): "",
     }));
   };
   const toggleUnitario = () => {
@@ -58,11 +73,11 @@ const ProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your logic to handle form submission here
-    console.log("Submitted:", product);
+    console.log(product);
   };
 
   return (
+
     <Card className={styles.carda}>
       <Typography variant="h5">Nuevo producto</Typography>
       <form onSubmit={handleSubmit}>
@@ -113,14 +128,37 @@ const ProductForm = () => {
           }}
           outputFormat="string"
         />
-        <TextField
+        {/* <TextField
           label="Categoria"
           name="category"
           value={product.category}
           onChange={handleChange}
           fullWidth
           margin="normal"
-        />
+        /> */}
+        <FormControl fullWidth>
+
+      <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={product.category}
+          label="Categoria"
+          name="category"
+          onChange={handleChange}
+          
+          >
+          {categorias.map((category, index) => {
+            return(
+          <MenuItem key={index} 
+            value={category.id}>
+              {category.nombre}
+              </MenuItem>)
+            }  
+            )}
+          
+        </Select>
+            </FormControl>
 
         <FormControlLabel
           sx={{ display: "box", width: "100%" }}
