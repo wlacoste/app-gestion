@@ -17,17 +17,36 @@ export const useProductos = () => {
     const [productos, setProductos] = useState([]);
     const [error, setError] = useState();
     const [loading, setLoading] = useState({});
-    const { getData } = useFireDB();
+    const { getData, addData, deleteData, updateData } = useFireDB();
 
 
     const getProductos = async () => {
+      console.log("obteninendo productos");
         getData("productos", setLoading, setProductos, setError, true);
     }
+    const addProducto = async (data) => {
+        addData(data, "productos", setLoading, setProductos, setError);
+    }
+    const deleteProducto = async (id) => {
+      deleteData(id, "productos", setLoading, setProductos, setError);
+    }
+
+    const updateProducto = async (data) => {
+      updateData(data, "productos", setLoading, setProductos, setError);
+  }
+
+    useEffect(()=>{
+      console.log(productos);
+    },[productos]);
+
 
       return {
         productos,
         error,
         loading,
         getProductos,
+        addProducto,
+        deleteProducto,
+        updateProducto
       };
 }

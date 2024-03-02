@@ -21,6 +21,7 @@ import styles from "./styles.module.scss";
 
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { useCategories } from "src/hooks/useCategories";
+import { useProductos } from "src/hooks/useProductos";
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -31,13 +32,15 @@ const ProductForm = () => {
     category: "",
     fechaVencimiento: "",
     isVence: false,
-    fechaCreacion: dayjs(),
+    fechaCreacion: dayjs().format("DD/MM/YYYY"),
   });
 
   const {getCategorias, categorias, loading} = useCategories();
+  const { addProducto, getProductos ,loading: loadProductos ,productos} = useProductos();
 
   useEffect(()=>{
     getCategorias();
+    getProductos();
   },[]);
 
   const handleChange = (e) => {
@@ -73,12 +76,33 @@ const ProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
+    // console.log(product.fechaVencimiento.format("DD/MM/YYYY"));
+     addProducto({...product, fechaVencimiento: product.fechaVencimiento.format("DD/MM/YYYY")});
+    console.log({...product, fechaVencimiento: product.fechaVencimiento.format("DD/MM/YYYY")});
   };
 
   return (
 
     <Card className={styles.carda}>
+      {
+      
+        productos.map((prod, index) =>{
+          return(
+          <div key = {index}>
+            <p>
+              {prod.uid}
+              {prod.productName}
+              {prod.fechaVencimiento}
+              {prod.isVence}
+              {prod.quantity}
+              </p>
+              </div>
+          );
+        
+        })
+        
+      
+      }
       <Typography variant="h5">Nuevo producto</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -114,6 +138,7 @@ const ProductForm = () => {
           }
           label="precio unitario"
         />
+
         <CurrencyTextField
           label="Precio"
           name="price"
@@ -128,6 +153,7 @@ const ProductForm = () => {
           }}
           outputFormat="string"
         />
+
         {/* <TextField
           label="Categoria"
           name="category"
@@ -171,9 +197,11 @@ const ProductForm = () => {
           }
           label="vence?"
         />
-        <Collapse in={product.isVence} timeout="auto" unmountOnExit>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Collapse in={product.isVence} timeout="auto" unmountOnExit >
+
+          <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
             <DatePicker
+            
               label="Fecha de vencimiento"
               value={product.fechaVencimiento}
               // @ts-ignore
@@ -182,14 +210,16 @@ const ProductForm = () => {
               openTo="month"
               format="DD-MM-YYYY"
               disablePast={true}
-              sx={{ marginTop: "0.5rem", marginBottom: "1rem" }}
+              sx={{ marginTop: "0.5rem", marginBottom: "1rem" ,border:"1px solid red"}}
               slotProps={{
                 textField: {
-                  helperText: "fecha por default en 2 semanas ",
+                  helperText: "fecha por default en 2 semanas",
+                  fullWidth:true
                 },
               }}
             />
           </LocalizationProvider>
+
         </Collapse>
 
         <Button type="submit" variant="contained" color="primary">

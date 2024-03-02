@@ -64,7 +64,7 @@ const Movimiento = () => {
     <Card className={styles.carda}>
       <Typography variant="h5">Nuevo movimiento</Typography>
       <form onSubmit={handleSubmit}>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex"}}>
           <ToggleButtonGroup
             value={product.esEgreso}
             exclusive
@@ -126,7 +126,12 @@ const Movimiento = () => {
             onChange={setFecha}
             views={["year", "month", "day"]}
             format="DD-MM-YYYY"
-            sx={{ marginTop: "0.5rem", marginBottom: "1rem" }}
+            sx={{ marginTop: "0.5rem", marginBottom: "2rem" }}
+            slotProps={{
+              textField: {
+                fullWidth:true
+              },
+            }}
           />
         </LocalizationProvider>
 
