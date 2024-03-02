@@ -73,19 +73,14 @@ const ProductForm = () => {
       fechaVencimiento: e,
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(product.fechaVencimiento.format("DD/MM/YYYY"));
      addProducto({...product, fechaVencimiento: product.fechaVencimiento.format("DD/MM/YYYY")});
-    console.log({...product, fechaVencimiento: product.fechaVencimiento.format("DD/MM/YYYY")});
   };
 
   return (
-
     <Card className={styles.carda}>
       {
-      
         productos.map((prod, index) =>{
           return(
           <div key = {index}>
@@ -98,10 +93,7 @@ const ProductForm = () => {
               </p>
               </div>
           );
-        
         })
-        
-      
       }
       <Typography variant="h5">Nuevo producto</Typography>
       <form onSubmit={handleSubmit}>
@@ -138,7 +130,6 @@ const ProductForm = () => {
           }
           label="precio unitario"
         />
-
         <CurrencyTextField
           label="Precio"
           name="price"
@@ -153,38 +144,28 @@ const ProductForm = () => {
           }}
           outputFormat="string"
         />
-
-        {/* <TextField
-          label="Categoria"
-          name="category"
-          value={product.category}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        /> */}
         <FormControl fullWidth>
-
-      <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={product.category}
-          label="Categoria"
-          name="category"
-          onChange={handleChange}
-          
-          >
-          {categorias.map((category, index) => {
-            return(
-          <MenuItem key={index} 
-            value={category.id}>
-              {category.nombre}
-              </MenuItem>)
-            }  
-            )}
-          
-        </Select>
-            </FormControl>
+        <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={product.category}
+            label="Categoria"
+            name="category"
+            onChange={handleChange}
+            
+            >
+            {categorias.map((category, index) => {
+              return(
+            <MenuItem key={index} 
+              value={category.id}>
+                {category.nombre}
+                </MenuItem>)
+              }  
+              )}
+            
+          </Select>
+        </FormControl>
 
         <FormControlLabel
           sx={{ display: "box", width: "100%" }}
@@ -201,7 +182,6 @@ const ProductForm = () => {
 
           <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
             <DatePicker
-            
               label="Fecha de vencimiento"
               value={product.fechaVencimiento}
               // @ts-ignore
